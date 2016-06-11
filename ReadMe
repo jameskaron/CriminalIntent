@@ -1,0 +1,13 @@
+1.UI Fragement
+
+2.preliminary to build: extends FragmentActivity
+                  Crime class : UUID
+                  hosted UI fragment
+
+3.live circle of fragment
+
+4.FrameLayout: activity_crime.xml --> fragment_crime.xml
+
+5.onCreateView()
+
+6.FragmentManager
