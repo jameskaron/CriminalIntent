@@ -21,7 +21,12 @@ public class TimePickerFragment extends DialogFragment {
 
     public static TimePickerFragment newInstance(Date date) {
 
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(EXTRA_TIME, date);
+
         TimePickerFragment timePickerFragment = new TimePickerFragment();
+
+        timePickerFragment.setArguments(bundle);
 
         return timePickerFragment;
     }

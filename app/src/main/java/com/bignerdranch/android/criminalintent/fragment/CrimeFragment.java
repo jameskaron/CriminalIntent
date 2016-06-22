@@ -3,6 +3,8 @@ package com.bignerdranch.android.criminalintent.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
@@ -35,6 +37,10 @@ public class CrimeFragment extends android.support.v4.app.Fragment {
     private static final String DIALOG_TIME = "time";
 
     private static final int REQUEST_DATE = 0;
+
+    private static final int REQUEST_TIME = 1;
+
+    private static final int TIME_HANDLER = 11;
 
     private Crime crime;
     private Date date;
@@ -125,9 +131,14 @@ public class CrimeFragment extends android.support.v4.app.Fragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 TimePickerFragment dialog = TimePickerFragment.newInstance(crime.getDate());
 
+                dialog.setTargetFragment(CrimeFragment.this, REQUEST_TIME);
                 dialog.show(fm,DIALOG_TIME);
             }
         });
+
+        //time thread
+        new Thread(timeTread).start();
+
         return v;
     }
 
@@ -157,5 +168,35 @@ public class CrimeFragment extends android.support.v4.app.Fragment {
         dateButton.setText(dateFormat.format("EEEE,MMM dd,yyyy",date));
 
         timeButton.setText(dateFormat.format("HH：mm",date));
+
+
     }
+
+
+    Handler timeHandler = new Handler(){
+
+        @Override
+        public void handleMessage(Message msg) {
+
+            switch (msg.what) {
+                case TIME_HANDLER:
+
+            }
+            super.handleMessage(msg);
+        }
+    };
+
+    private Runnable timeTread = new Runnable(){
+
+        @Override
+        public void run() {
+            Message msg = new Message();
+            msg.what = TIME_HANDLER;
+
+        }
+    };
+
+
+
+
 }
